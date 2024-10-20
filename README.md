@@ -20,13 +20,16 @@ Open a command prompt and type the following commands:
 
 ## Usage
 
-1. Clone the GitHub repository to your local machine: `git clone https://github.com/maksym-odanets/presentation-voiceover`
-2. Navigate to the directory: `cd presentation-voiceover/src`
-3. Run the script with the necessary arguments. For example: `python main.py --api-key YOUR_OPENAI_API_KEY --pptx-file PATH_TO_YOUR_PPTX_FILE --audio-dir PATH_TO_AUDIO_DIR`
+1. Create a PowerPoint presentation and add your slides.
+2. For each slide, add notes that you want to be transformed into audio. You can add notes in PowerPoint by clicking on the "Notes" section at the bottom of the slide and typing your text.
+3. Save your presentation.
+4. Clone the GitHub repository to your local machine: `git clone https://github.com/maksym-odanets/presentation-voiceover`
+5. Navigate to the directory: `cd presentation-voiceover/src`
+6. Run the script with the necessary arguments. For example: `python main.py --api-key YOUR_OPENAI_API_KEY --pptx-file PATH_TO_YOUR_PPTX_FILE --audio-dir PATH_TO_AUDIO_DIR`
 
 Replace `YOUR_OPENAI_API_KEY` with your actual OpenAI API key, `PATH_TO_YOUR_PPTX_FILE` with the path to the PowerPoint file you want to add voiceovers to, and `PATH_TO_AUDIO_DIR` with the directory where you want to store the audio files.
 
-The script will generate voiceovers for the slide notes in your PowerPoint presentation and save a new presentation with the voiceovers embedded.
+The script will generate voiceovers for the slide notes in your PowerPoint presentation and save a new presentation with the voiceovers embedded. The audio files will be stored in the specified audio directory, or in a new directory in the system's temp directory if no audio directory is specified or if the specified directory does not exist.
 
 ### Arguments
 
@@ -36,7 +39,9 @@ The script will generate voiceovers for the slide notes in your PowerPoint prese
 - `--voice`: Optional. The voice to use for text-to-speech generation. Default is "alloy". You can find other possible voices on the [OpenAI Text-to-Speech guide](https://platform.openai.com/docs/guides/text-to-speech).
 - `--audio-dir`: Optional. The directory where you want to store the audio files. If not provided or if the directory does not exist, a new directory will be created in the system's temp directory with the name of the presentation.
 
-The script will generate voiceovers for the slide notes in your PowerPoint presentation and save a new presentation with the voiceovers embedded. The audio files will be stored in the specified audio directory, or in a new directory in the system's temp directory if no audio directory is specified or if the specified directory does not exist.
+## Known Issues
+
+- After adding a sound to a slide, the existing Animation might be reset to be a Default "Appear". This is a known issue and we are looking into ways to preserve the original animation settings when adding a voiceover. In the meantime, you may need to manually reset the animation settings after running the script. We apologize for any inconvenience this may cause.
 
 ## Buy me a coffee
 If you find my content helpful and would like to show your appreciation, please consider buying me a coffee. Your support is greatly appreciated! 😊
