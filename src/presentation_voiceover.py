@@ -22,13 +22,16 @@ class PresentationVoiceover:
         if not notes_text:
             return
 
-        speech_file_path = self.audio_dir / f"slide_{slide_number}_speech.mp3"
+        speech_file_path = self.audio_dir / self.get_slide_audio_filename(slide_number)
         if not speech_file_path.exists():
             if not self.tts.generate_speech(notes_text, speech_file_path):
                 self.logger.error(f"Failed to generate speech for slide {slide_number}")
                 return
 
         self.embed_audio(slide, speech_file_path, left_position)
+
+    def get_slide_audio_filename(self, slide_number: int):
+        return f"slide_{slide_number}_speech.mp3"
 
     def extract_notes(self, slide, slide_number: int):
         notes_page = slide.NotesPage

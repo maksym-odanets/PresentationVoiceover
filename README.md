@@ -25,11 +25,31 @@ Open a command prompt and type the following commands:
 3. Save your presentation.
 4. Clone the GitHub repository to your local machine: `git clone https://github.com/maksym-odanets/presentation-voiceover`
 5. Navigate to the directory: `cd presentation-voiceover/src`
-6. Run the script with the necessary arguments. For example: `python main.py --api-key YOUR_OPENAI_API_KEY --pptx-file PATH_TO_YOUR_PPTX_FILE --audio-dir PATH_TO_AUDIO_DIR`
+6. Run the script with the necessary arguments. For example: `python main.py --api-key YOUR_OPENAI_API_KEY --pptx-file PATH_TO_YOUR_PPTX_FILE`
 
-Replace `YOUR_OPENAI_API_KEY` with your actual OpenAI API key, `PATH_TO_YOUR_PPTX_FILE` with the path to the PowerPoint file you want to add voiceovers to, and `PATH_TO_AUDIO_DIR` with the directory where you want to store the audio files.
+Replace `YOUR_OPENAI_API_KEY` with your actual OpenAI API key, `PATH_TO_YOUR_PPTX_FILE` with the path to the PowerPoint file you want to add voiceovers to.
 
 The script will generate voiceovers for the slide notes in your PowerPoint presentation and save a new presentation with the voiceovers embedded. The audio files will be stored in the specified audio directory, or in a new directory in the system's temp directory if no audio directory is specified or if the specified directory does not exist.
+
+### Audio File Caching
+
+For cost-effectiveness, all audio files (voiceovers) are cached. This means that if you run the script multiple times with the same arguments, it will not regenerate the voiceovers unless you use the `--no-cache` or `--slides` arguments to clear the cache.
+
+### Regenerating All Slides
+
+If you want to regenerate the voiceovers for all slides, you can use the `--no-cache` argument:
+
+`python main.py --api-key YOUR_OPENAI_API_KEY --pptx-file PATH_TO_YOUR_PPTX_FILE --no-cache`
+
+This will clear the audio cache and regenerate the voiceovers for all slides.
+
+### Regenerating Specific Slides
+
+If you want to regenerate the voiceovers for specific slides, you can use the `--slides` argument:
+
+`python main.py --api-key YOUR_OPENAI_API_KEY --pptx-file PATH_TO_YOUR_PPTX_FILE --slides "1,3,5"`
+
+This will regenerate the voiceovers for slides 1, 3, and 5.
 
 ### Arguments
 
@@ -38,6 +58,8 @@ The script will generate voiceovers for the slide notes in your PowerPoint prese
 - `--model`: Optional. The model to use for text-to-speech generation. Default is "tts-1".
 - `--voice`: Optional. The voice to use for text-to-speech generation. Default is "alloy". You can find other possible voices on the [OpenAI Text-to-Speech guide](https://platform.openai.com/docs/guides/text-to-speech).
 - `--audio-dir`: Optional. The directory where you want to store the audio files. If not provided or if the directory does not exist, a new directory will be created in the system's temp directory with the name of the presentation.
+- `--no-cache`: Optional. If set, the audio directory will be emptied before processing.
+- `--slides`: Optional. A comma-separated list of slide numbers to regenerate. If provided, only the audio files for these slides will be regenerated.
 
 ## Known Issues
 
