@@ -21,7 +21,7 @@ Open a command prompt and type the following commands:
 ## Usage
 
 1. Create a PowerPoint presentation and add your slides.
-2. For each slide, add notes that you want to be transformed into audio. You can add notes in PowerPoint by clicking on the "Notes" section at the bottom of the slide and typing your text.
+2. For each slide, add Presenter Notes that you want to be transformed into audio. You can add notes in PowerPoint by clicking on the "Notes" section at the bottom of the slide and typing your text.
 3. Save your presentation.
 4. Clone the GitHub repository to your local machine: `git clone https://github.com/maksym-odanets/presentation-voiceover`
 5. Navigate to the directory: `cd presentation-voiceover/src`
