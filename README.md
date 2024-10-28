@@ -33,7 +33,7 @@ The script will generate voiceovers for the slide notes in your PowerPoint prese
 
 ### Audio File Caching
 
-For cost-effectiveness, all audio files (voiceovers) are cached. This means that if you run the script multiple times with the same arguments, it will not regenerate the voiceovers unless you use the `--no-cache` or `--slides` arguments to clear the cache.
+For cost-effectiveness, all audio files (voiceovers) are cached. This means that if you run the script multiple times with the same presentation notes, it will not regenerate the voiceovers unless you use the `--no-cache` argument to clear the cache.
 
 ### Regenerating All Slides
 
@@ -43,14 +43,6 @@ If you want to regenerate the voiceovers for all slides, you can use the `--no-c
 
 This will clear the audio cache and regenerate the voiceovers for all slides.
 
-### Regenerating Specific Slides
-
-If you want to regenerate the voiceovers for specific slides, you can use the `--slides` argument:
-
-`python main.py --api-key YOUR_OPENAI_API_KEY --pptx-file PATH_TO_YOUR_PPTX_FILE --slides "1,3,5"`
-
-This will regenerate the voiceovers for slides 1, 3, and 5.
-
 ### Arguments
 
 - `--api-key`: Required. Your OpenAI API key.
@@ -59,7 +51,6 @@ This will regenerate the voiceovers for slides 1, 3, and 5.
 - `--voice`: Optional. The voice to use for text-to-speech generation. Default is "alloy". You can find other possible voices on the [OpenAI Text-to-Speech guide](https://platform.openai.com/docs/guides/text-to-speech).
 - `--audio-dir`: Optional. The directory where you want to store the audio files. If not provided or if the directory does not exist, a new directory will be created in the system's temp directory with the name of the presentation.
 - `--no-cache`: Optional. If set, the audio directory will be emptied before processing.
-- `--slides`: Optional. A comma-separated list of slide numbers to regenerate. If provided, only the audio files for these slides will be regenerated.
 
 ## Known Issues
 

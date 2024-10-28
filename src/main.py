@@ -11,7 +11,6 @@ def parse_arguments():
     parser = argparse.ArgumentParser(description="PowerPoint Voiceover.")
     parser.add_argument("--api-key", required=True, help="API key to access the OpenAI")
     parser.add_argument("--pptx-file", required=True, help="The path to the PowerPoint presentation")
-    parser.add_argument("--slides", default="", help="Comma-separated list of slide numbers to regenerate")
     parser.add_argument("--audio-dir", help="The directory to store audio files")
     parser.add_argument("--no-cache", action='store_true', help="If set, the audio directory will be emptied before processing")
     parser.add_argument("--model", default="tts-1", help="Model to use for text-to-speech generation")
@@ -23,10 +22,8 @@ def create_audio_dir(base_dir, presentation_path):
     audio_dir.mkdir(exist_ok=True)
     return audio_dir
 
-def clear_audio_cache(audio_dir, slides_to_regenerate=None):
+def clear_audio_cache(audio_dir):
     for audio_file in audio_dir.glob("*.mp3"):
-        if slides_to_regenerate and audio_file.name not in slides_to_regenerate:
-            continue
         audio_file.unlink()
 
 def main():
@@ -43,9 +40,6 @@ def main():
 
     if args.no_cache:
         clear_audio_cache(audio_dir)
-    elif args.slides:
-        slides_to_regenerate = [pptx_notes_to_voiceover.get_slide_audio_filename(slide) for slide in args.slides.split(",")]
-        clear_audio_cache(audio_dir, slides_to_regenerate)
 
     pptx_notes_to_voiceover.handle(prs, audio_dir)
 

@@ -1,3 +1,4 @@
+import hashlib
 from win32com.client import Dispatch
 
 from logger import LoggerInterface
@@ -22,16 +23,20 @@ class PresentationVoiceover:
         if not notes_text:
             return
 
-        speech_file_path = self.audio_dir / self.get_slide_audio_filename(slide_number)
-        if not speech_file_path.exists():
-            if not self.tts.generate_speech(notes_text, speech_file_path):
-                self.logger.error(f"Failed to generate speech for slide {slide_number}")
-                return
+        speech_file_path = self.audio_dir / self.get_slide_audio_filename(notes_text)
+        if speech_file_path.exists():
+            self.logger.info(f"Voiceover for slide {slide_number} already exists. Skipping.")
+            return
+
+        if not self.tts.generate_speech(notes_text, speech_file_path):
+            self.logger.error(f"Failed to generate speech for slide {slide_number}")
+            return
 
         self.embed_audio(slide, speech_file_path, left_position)
 
-    def get_slide_audio_filename(self, slide_number: int):
-        return f"slide_{slide_number}_speech.mp3"
+    def get_slide_audio_filename(self, notes_text: str):
+        notes_hash = hashlib.md5(notes_text.encode()).hexdigest()
+        return f"{notes_hash}.mp3"
 
     def extract_notes(self, slide, slide_number: int):
         notes_page = slide.NotesPage
